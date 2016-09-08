@@ -5,7 +5,10 @@ using UnityEngine.UI;
 public class MoveCollider : MonoBehaviour {
 	public KeyCode activateString;
 	public float xPos;
+    public Font sucfont;
 	public Text succesprompt;
+    public Text score;
+
 	// Use this for initialization
 	void Start () {
 
@@ -38,11 +41,15 @@ public class MoveCollider : MonoBehaviour {
 
 	}
 	void OnTriggerEnter(Collider other){
-		
+        Color thecolor = new Color();
+        ColorUtility.TryParseHtmlString("#FFB800FF", out thecolor);
 		if (other.gameObject.tag == "Note") {
 			
 			Destroy (other.gameObject);
 			Debug.Log ("object destroyed:Success");
+            score.text = "" + (double.Parse(score.text) + 100);
+            succesprompt.color = thecolor;
+            succesprompt.font = sucfont;
 			succesprompt.text = "GREAT";
 		}
 	}

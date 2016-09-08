@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class DestroyNote : MonoBehaviour {
     public Text failprompt;
+    public Font failfont;
     // Use this for initialization
     void Start () {
 	
@@ -17,9 +18,12 @@ public class DestroyNote : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		
 		if(other.gameObject.tag=="Note"){
-			
-			Destroy (other.gameObject);
+            Color thecolor = new Color();
+            ColorUtility.TryParseHtmlString("#FF0000FF", out thecolor);
+            Destroy (other.gameObject);
 			Debug.Log ("object destroyed:Fail");
+            failprompt.color = thecolor;
+            failprompt.font = failfont;
             failprompt.text = "FAIL";
             StartCoroutine(updateText());
             
