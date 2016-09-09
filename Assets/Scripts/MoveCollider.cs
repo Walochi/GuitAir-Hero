@@ -25,7 +25,7 @@ public class MoveCollider : MonoBehaviour {
 	IEnumerator retractCollider(){
 	
 		yield return new WaitForSeconds (0.1f);
-		transform.position=new Vector3(xPos,-51.89f,1);
+		transform.position=new Vector3(xPos, -47.4f, 1);
         yield return new WaitForSeconds(0.5f);
         succesprompt.text = "";
 		//yield return new WaitForSeconds (0.3f);
@@ -34,7 +34,7 @@ public class MoveCollider : MonoBehaviour {
 	void onClick(){
 
 			
-			transform.position=new Vector3(xPos,-32.5f,1);
+			transform.position=new Vector3(xPos, -34.47f, 1);
 			
 
 			StartCoroutine (retractCollider());
