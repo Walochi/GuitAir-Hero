@@ -23,7 +23,7 @@ public class SpawnNotes : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		
+        Screen.SetResolution(1280, 720, true);
 		while (counter < col1.Count) {
 			if (col1 [counter] == 1) {
 				GameObject temp = Instantiate (firstNote, new Vector3 (-54.7f, 50f, 1),firstNote.transform.rotation) as GameObject;
