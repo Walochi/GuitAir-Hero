@@ -1,46 +1,61 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Environment = System.Environment;
 
 public class SpawnNotes : MonoBehaviour
 {
-
-	List<float> col1 = new List<float> () { 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0 };
-	List<float> col2 = new List<float> () { 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0 };
-	List<float> col3 = new List<float> () { 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1 };
-	List<float> col4 = new List<float> () { 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0 };
+	string savedGamesPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments).Replace("\\","/") + "/My Games/GuitairHero/";
 
 	public GameObject firstNote;
 	public GameObject secondNote;
 	public GameObject thirdNote;
 	public GameObject fourthNote;
+
+	string col1 = "";
+	string col2 = "";
+	string col3 = "";
+	string col4 = "";
 	Stack<GameObject> noteStack1 = new Stack<GameObject>();
 	Stack<GameObject> noteStack2 = new Stack<GameObject>();
 	Stack<GameObject> noteStack3 = new Stack<GameObject>();
 	Stack<GameObject> noteStack4 = new Stack<GameObject>();
 	int counter = 0;
+	float countdown = 3.0f;
 
 	// Use this for initialization
 	void Start ()
 	{
+		string[] text = System.IO.File.ReadAllLines(savedGamesPath+"Pokemon Season 1 Theme Song (TV Version).txt");
+		col1 += text [0];
+		col2 += text [1];
+		col3 += text [2];
+		col4 += text [3];
+
+		Debug.Log (counter);
+		Debug.Log (col1.Length);
+
+
         Screen.SetResolution(1280, 720, true);
-		while (counter < col1.Count) {
-			if (col1 [counter] == 1) {
+
+		while (counter < col1.Length) {
+
+			if (col1 [counter] == '1') {
 				GameObject temp = Instantiate (firstNote, new Vector3 (-54.7f, 50f, 1),firstNote.transform.rotation) as GameObject;
 				temp.SetActive (false);
 				noteStack1.Push(temp);
 			}
-			if (col2 [counter] == 1) {
+			if (col2 [counter] == '1') {
 				GameObject temp = Instantiate (secondNote, new Vector3 (-46.1f, 50f, 1),secondNote.transform.rotation) as GameObject;
 				temp.SetActive (false);
 				noteStack2.Push(temp);
 			}
-			if (col3 [counter] == 1) {
+			if (col3 [counter] == '1') {
 				GameObject temp = Instantiate (thirdNote, new Vector3 (-37.1f, 50f, 1),thirdNote.transform.rotation) as GameObject;
 				temp.SetActive (false);
 				noteStack3.Push(temp);
 			}		
-			if (col4 [counter] == 1) {
+			if (col4 [counter] == '1') {
 				GameObject temp = Instantiate (fourthNote, new Vector3 (-28.5f, 50f, 1),fourthNote.transform.rotation) as GameObject;
 				temp.SetActive (false);
 				noteStack4.Push(temp);
@@ -50,13 +65,35 @@ public class SpawnNotes : MonoBehaviour
 
 		counter = 0;
 
-		StartCoroutine (attachMovement ());
 	}
 
 	// Update is called once per frame
 	void Update ()
 	{
+		if (countdown >= 0) {
+			Debug.Log (countdown);
+			countdown -= Time.deltaTime;
+			
+			return;
+		} else {
 
+			if (counter < col1.Length) {
+
+				if (col1 [counter] == '1') {
+					noteStack1.Pop ().SetActive(true);
+				}
+				if (col2 [counter] == '1') {
+					noteStack2.Pop ().SetActive(true);
+				}
+				if (col3 [counter] == '1') {
+					noteStack3.Pop ().SetActive(true);
+				}
+				if (col4 [counter] == '1') {
+					noteStack4.Pop ().SetActive(true);
+				}
+				counter += 1;
+			}
+		}
 	}
 
 	IEnumerator attachMovement ()
@@ -65,7 +102,7 @@ public class SpawnNotes : MonoBehaviour
 		while (true) {
 			yield return new WaitForSeconds (1f);
 
-			if (counter < col1.Count) {
+			if (counter < col1.Length) {
 				
 				if (col1 [counter] == 1) {
 					noteStack1.Pop ().SetActive(true);
