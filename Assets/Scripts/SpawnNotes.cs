@@ -6,6 +6,7 @@ using Environment = System.Environment;
 public class SpawnNotes : MonoBehaviour
 {
 	string savedGamesPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments).Replace("\\","/") + "/My Games/GuitairHero/";
+	AudioSource song;
 
 	public GameObject firstNote;
 	public GameObject secondNote;
@@ -21,19 +22,22 @@ public class SpawnNotes : MonoBehaviour
 	Stack<GameObject> noteStack3 = new Stack<GameObject>();
 	Stack<GameObject> noteStack4 = new Stack<GameObject>();
 	int counter = 0;
-	float countdown = 3.0f;
+	float countdown = 0;
 
 	// Use this for initialization
 	void Start ()
 	{
+		song = GetComponent<AudioSource> ();
 		string[] text = System.IO.File.ReadAllLines(savedGamesPath+"Pokemon Season 1 Theme Song (TV Version).txt");
 		col1 += text [0];
 		col2 += text [1];
 		col3 += text [2];
 		col4 += text [3];
 
-		Debug.Log (counter);
-		Debug.Log (col1.Length);
+		Debug.Log (col1);
+		Debug.Log (col2);
+		Debug.Log (col3);
+		Debug.Log (col4);
 
 
         Screen.SetResolution(1280, 720, true);
@@ -64,7 +68,7 @@ public class SpawnNotes : MonoBehaviour
 		}
 
 		counter = 0;
-
+		song.Play();
 	}
 
 	// Update is called once per frame
