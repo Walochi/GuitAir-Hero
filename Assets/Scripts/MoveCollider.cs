@@ -4,7 +4,8 @@ using UnityEngine.UI;
 
 public class MoveCollider : MonoBehaviour {
 	public KeyCode activateString;
-	public float xPos;
+    public KeyCode activateSpace;
+    public float xPos;
     public Font sucfont;
 	public Text succesprompt;
     public Text score;
@@ -17,7 +18,7 @@ public class MoveCollider : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-		if (Input.GetKeyDown (activateString)) {
+		if (Input.GetKey (activateString)&&Input.GetKeyDown(activateSpace   )) {
 			onClick ();
 		}
 
