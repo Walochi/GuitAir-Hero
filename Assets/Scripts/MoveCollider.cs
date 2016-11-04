@@ -18,7 +18,7 @@ public class MoveCollider : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-		if (Input.GetKey (activateString)&&Input.GetKeyDown(activateSpace   )) {
+		if (Input.GetKey (activateString)&&Input.GetKeyDown(activateSpace)) {
 			onClick ();
 		}
 

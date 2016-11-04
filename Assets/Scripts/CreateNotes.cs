@@ -10,11 +10,12 @@ public class CreateNotes : MonoBehaviour {
 	public AudioClip song;
 	float duration;
 	AudioSource a;
-	string savedGamesPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments).Replace("\\","/") + "/My Games/GuitairHero/";
+	//string savedGamesPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments).Replace("\\","/") + "/My Games/GuitairHero/";
+	string savedGamesPath;
 	bool flag = true;
 	// Use this for initialization
 	void Start () {
-		
+		savedGamesPath = Application.dataPath+"/../";
 		a = GetComponent<AudioSource>();
 		a.clip = song;
 		duration = song.length;
@@ -56,7 +57,7 @@ public class CreateNotes : MonoBehaviour {
 			if (flag) {
 				string[] piece = { a1, a2, a3, a4 };
 				System.IO.File.WriteAllLines (savedGamesPath + song.name + ".txt", piece);
-				Debug.Log (song.name + ".txt successfully created!");
+				Debug.Log (song.name + ".txt successfully created at "+savedGamesPath+"!");
 				flag = !flag;
 			}
 		}
