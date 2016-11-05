@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using Environment = System.Environment;
 
 public class SpawnNotes : MonoBehaviour
@@ -100,6 +101,9 @@ public class SpawnNotes : MonoBehaviour
 				}
 				counter += 1;
 			}
+		}
+		if (!SourceSong.isPlaying) {
+			SceneManager.LoadScene ("Score");
 		}
 	}
 

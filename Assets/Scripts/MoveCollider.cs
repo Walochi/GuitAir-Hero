@@ -9,9 +9,9 @@ public class MoveCollider : MonoBehaviour {
     public Font sucfont;
 	public Text succesprompt;
     public Text score;
-
+	static public double thescore = 0;
 	// Use this for initialization
-	void Start () {
+	void Start () { 
 
 	}
 	
@@ -49,9 +49,11 @@ public class MoveCollider : MonoBehaviour {
 			Destroy (other.gameObject);
 			Debug.Log ("object destroyed:Success");
             score.text = "" + (double.Parse(score.text) + 100);
+			thescore = double.Parse (score.text);
             succesprompt.color = thecolor;
             succesprompt.font = sucfont;
 			succesprompt.text = "GREAT";
 		}
 	}
+
 }
