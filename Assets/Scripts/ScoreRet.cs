@@ -9,6 +9,11 @@ public class ScoreRet : MonoBehaviour {
 	public Text Finalscore;
 	public Text Rank;
 	public Text Hcombo;
+	static public int missgreen=0;
+	static public int missblue=0;
+	static public int missyellow=0;
+	static public int missorange=0;
+
 
 	void Start () {
 		Finalscore.text = MoveCollider.thescore + "";
@@ -65,6 +70,8 @@ public class ScoreRet : MonoBehaviour {
 				Rank.text = "Rank D";		
 			}
 		}
+		Debug.Log ("Number of Missed notes: green:" + missgreen + ", blue:" + missblue + ", orange:" + missorange + ", yellow:" + missyellow);
+
 		Debug.Log (SpawnNotes.songName);
 		if (MoveCollider.thescore == 0) {
 			Rank.text = "Rank F";

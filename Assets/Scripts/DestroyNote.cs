@@ -20,6 +20,17 @@ public class DestroyNote : MonoBehaviour {
 		if(other.gameObject.tag=="Note"){
             Color thecolor = new Color();
             ColorUtility.TryParseHtmlString("#FF0000FF", out thecolor);
+
+			if (other.gameObject.name.CompareTo ("blue-note (1)(Clone)")==0) {
+				ScoreRet.missblue++;
+			} else if (other.gameObject.name.CompareTo ("orange-note (1)(Clone)")==0) {
+				ScoreRet.missorange++;
+			} else if (other.gameObject.name.CompareTo ("green-note (1)(Clone)")==0) {
+				ScoreRet.missgreen++;
+			} else if (other.gameObject.name.CompareTo ("yellow-note (1)(Clone)")==0) {
+				ScoreRet.missyellow++;
+			}
+
             Destroy (other.gameObject);
 			Debug.Log ("object destroyed:Fail");
             failprompt.color = thecolor;
