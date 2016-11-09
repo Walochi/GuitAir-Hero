@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Environment = System.Environment;
 
 public class SpawnNotes : MonoBehaviour
@@ -14,6 +15,9 @@ public class SpawnNotes : MonoBehaviour
 	public GameObject secondNote;
 	public GameObject thirdNote;
 	public GameObject fourthNote;
+	static public string songName;
+	static public int combocount;
+	static public int combomulti = 1;
 
 	string col1 = "";
 	string col2 = "";
@@ -33,7 +37,7 @@ public class SpawnNotes : MonoBehaviour
 		string[] text = System.IO.File.ReadAllLines(savedGamesPath+song.name+".txt");
 		SourceSong = GetComponent<AudioSource>();
 		SourceSong.PlayDelayed(2);
-
+		songName =SceneManager.GetActiveScene ().name;
 		col1 += text [0];
 		col2 += text [1];
 		col3 += text [2];
@@ -102,8 +106,18 @@ public class SpawnNotes : MonoBehaviour
 				counter += 1;
 			}
 		}
+		if (combocount >= 15 && combocount <= 29) {
+			combomulti = 2;
+		} else if (combocount >= 30 && combocount <= 49) {
+			combomulti = 3;
+		} else if (combocount >= 50) {
+			combomulti = 4;
+		} else {
+			combomulti = 1;
+		}
+
 		if (!SourceSong.isPlaying) {
-			SceneManager.LoadScene ("Score");
+			StartCoroutine(Score());
 		}
 	}
 
@@ -130,5 +144,9 @@ public class SpawnNotes : MonoBehaviour
 				counter += 1;
 			}
 		}
+	}
+	IEnumerator Score(){
+		yield return new WaitForSeconds(2f);
+		SceneManager.LoadScene ("Score");
 	}
 }

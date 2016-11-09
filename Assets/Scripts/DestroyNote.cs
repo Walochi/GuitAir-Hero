@@ -25,6 +25,7 @@ public class DestroyNote : MonoBehaviour {
             failprompt.color = thecolor;
             failprompt.font = failfont;
             failprompt.text = "FAIL";
+			SpawnNotes.combocount = 0;
             StartCoroutine(updateText());
             
 
